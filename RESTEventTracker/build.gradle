@@ -25,8 +25,15 @@ repositories {
 
 
 dependencies {
+	compile project(':JPAEventTracker')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile 'org.junit.jupiter:junit-jupiter-api:5.0.1'
+  	testCompile('org.apiguardian:apiguardian-api:1.0.0')
+  	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.0.1',
+        'org.junit.vintage:junit-vintage-engine:4.12.1',
+        'org.junit.platform:junit-platform-launcher:1.0.1',
+        'org.junit.platform:junit-platform-runner:1.0.1')
 }
