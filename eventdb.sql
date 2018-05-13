@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `name` VARCHAR(250) NOT NULL,
   `description` VARCHAR(1000) NOT NULL,
   `start_time` DATETIME NOT NULL,
-  `end_time` DATETIME NOT NULL,
+  `end_time` DATETIME NULL,
+  `activity_creation` DATETIME NOT NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
@@ -79,6 +80,6 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `eventdb`;
-INSERT INTO `activity` (`id`, `name`, `description`, `start_time`, `end_time`, `category_id`) VALUES (1, 'Test Activity', 'This is filler just to pass tests.', '2018-05-11 12:05:07', '2018-05-11 15:35:23', 1);
+INSERT INTO `activity` (`id`, `name`, `description`, `start_time`, `end_time`, `activity_creation`, `category_id`) VALUES (1, 'Test Activity', 'This is filler just to pass tests.', '2018-05-11 12:05:07', '2018-05-11 15:35:23', DEFAULT, 1);
 
 COMMIT;

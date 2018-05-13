@@ -17,7 +17,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Activity {
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +31,21 @@ public class Activity {
 	
 	@Column(name="start_time")
 	@Temporal(TemporalType.TIMESTAMP)
-	@CreationTimestamp
 	private Date startTime;
 	
 	@Column(name="end_time")
 	@Temporal(TemporalType.TIMESTAMP)
-	@UpdateTimestamp
 	private Date endTime;
+	
+	@Column(name="activity_creation")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Date creation;
+	
+	@Column(name="activity_update")
+	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
+	private Date update;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id")
@@ -98,6 +105,22 @@ public class Activity {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	public Date getCreation() {
+		return creation;
+	}
+
+	public void setCreation(Date creation) {
+		this.creation = creation;
+	}
+
+	public Date getUpdate() {
+		return update;
+	}
+
+	public void setUpdate(Date update) {
+		this.update = update;
 	}
 
 	public Category getCategory() {
