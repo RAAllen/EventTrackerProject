@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Activity {
 
@@ -26,12 +29,15 @@ public class Activity {
 	@Column(name="description")
 	private String description;
 	
+	
 	@Column(name="start_time")
 	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date startTime;
 	
 	@Column(name="end_time")
 	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
 	private Date endTime;
 	
 	@ManyToOne
@@ -44,8 +50,16 @@ public class Activity {
 		super();
 	}
 	
-	// End of Constructors
+	public Activity(String name, String description, Date startTime, Category category) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.startTime = startTime;
+		this.category = category;
+	}
 	
+	// End of Constructors
+
 	public int getId() {
 		return id;
 	}
