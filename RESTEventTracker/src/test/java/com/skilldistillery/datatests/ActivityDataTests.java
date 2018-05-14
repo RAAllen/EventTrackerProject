@@ -3,20 +3,13 @@ package com.skilldistillery.datatests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.skilldistillery.entities.Activity;
 import com.skilldistillery.services.ActivityService;
-import com.skilldistillery.services.CategoryService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,9 +17,6 @@ public class ActivityDataTests {
 
 	@Autowired
 	private ActivityService as;
-	
-	@Autowired
-	private CategoryService cs;
 	
 	@Test
 	public void test_index() {
@@ -43,6 +33,15 @@ public class ActivityDataTests {
 		assertEquals("Cat Name", as.show(1).getCategory().getName());
 	}
 	
+	@Test
+	public void test_findByCategoryId() {
+		assertEquals("Test Activity", as.findByCategoryId(1).get(0).getName());
+	}
+	
+	
+
+	
+// A little experiment in times... planning on possibly revisiting when i actually figure out what i want this to do
 //	@Test
 //	public void test_create() {
 //		String ldt = LocalDateTime.now().toString();

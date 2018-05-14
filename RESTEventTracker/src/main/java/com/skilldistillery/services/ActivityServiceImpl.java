@@ -15,10 +15,7 @@ public class ActivityServiceImpl implements ActivityService{
 
 	@Autowired
 	private ActivityRepository ar;
-	
-	@Autowired
-	private ActivityService as;
-	
+
 	@Override
 	public List<Activity> index() {
 		return ar.findAll();
@@ -54,7 +51,7 @@ public class ActivityServiceImpl implements ActivityService{
 	
 	@Override
 	public Activity update(Activity activity, int id) {
-		Activity managedActivity = as.show(id);
+		Activity managedActivity = show(id);
 		managedActivity.setId(id);
 		if(activity.getName() != null && !activity.getName().equals("")) {
 			managedActivity.setName(activity.getName());
@@ -79,6 +76,11 @@ public class ActivityServiceImpl implements ActivityService{
 			e.printStackTrace();
 		}
 		return b;
+	}
+	
+	@Override
+	public List<Activity> findByCategoryId(int id) {
+		return ar.findByCategoryId(id);
 	}
 	
 }

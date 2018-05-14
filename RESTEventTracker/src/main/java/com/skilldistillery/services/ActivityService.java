@@ -18,4 +18,6 @@ public interface ActivityService {
 	
 	public Boolean delete(int id);
 
+	List<Activity> findByCategoryId(int id);
+
 }
