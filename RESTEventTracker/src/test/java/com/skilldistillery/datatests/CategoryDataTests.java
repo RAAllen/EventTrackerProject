@@ -21,12 +21,12 @@ public class CategoryDataTests {
 	@Test
 	public void test_index() {
 		assertNotEquals(0, cs.index().size());
-		assertEquals("Cat Name", cs.index().get(0).getName());
+		assertEquals("Test Category Name", cs.index().get(0).getName());
 	}
 	
 	@Test
 	public void test_show() {
-		assertEquals("Cat Name", cs.show(1).getName());
+		assertEquals("Test Category Name", cs.show(1).getName());
 		assertEquals("This is a test category.", cs.show(1).getDescription());
 	}
 

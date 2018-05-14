@@ -28,7 +28,7 @@ public class CategoryControllerTests {
 		ResponseEntity<String> response = restTest.getForEntity("http://localhost:8080/api/categories", String.class);
 		ObjectMapper mapper = new ObjectMapper();
 		List<Category> categories = mapper.readValue(response.getBody(),  mapper.getTypeFactory().constructCollectionType(List.class, Category.class));
-		assertEquals("Cat Name", categories.get(0).getName());
+		assertEquals("Test Category Name", categories.get(0).getName());
 	}
 
 }

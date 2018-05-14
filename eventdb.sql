@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `start_time` DATETIME NOT NULL,
   `end_time` DATETIME NULL,
   `activity_creation` DATETIME NOT NULL,
+  `activity_update` DATETIME NULL,
   `category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
@@ -70,7 +71,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `eventdb`;
-INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'Cat Name', 'This is a test category.');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'Test Category Name', 'This is a test category.');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Another Test Category', 'This is a category made to test against.');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'A Third Category', 'This is another category made to run test.');
 
 COMMIT;
 
@@ -80,6 +83,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `eventdb`;
-INSERT INTO `activity` (`id`, `name`, `description`, `start_time`, `end_time`, `activity_creation`, `category_id`) VALUES (1, 'Test Activity', 'This is filler just to pass tests.', '2018-05-11 12:05:07', '2018-05-11 15:35:23', DEFAULT, 1);
+INSERT INTO `activity` (`id`, `name`, `description`, `start_time`, `end_time`, `activity_creation`, `activity_update`, `category_id`) VALUES (1, 'Test Activity', 'This is filler to test against.', '2018-05-11 12:05:07', '2018-05-11 15:35:23', '2018-05-11 17:35:23', NULL, 1);
+INSERT INTO `activity` (`id`, `name`, `description`, `start_time`, `end_time`, `activity_creation`, `activity_update`, `category_id`) VALUES (2, 'Another Activity', 'This is another activity to test.', '2018-02-14 10:35:30', NULL, '2018-03-01 10:05:35', '2018-05-12 18:21:08', 2);
+INSERT INTO `activity` (`id`, `name`, `description`, `start_time`, `end_time`, `activity_creation`, `activity_update`, `category_id`) VALUES (3, 'A Third Activity', 'This is another activity to use to run tests.', '2018-04-14 15:25:30', NULL, '2018-04-06 18:45:17', '2018-05-13 20:05:09', 3);
 
 COMMIT;

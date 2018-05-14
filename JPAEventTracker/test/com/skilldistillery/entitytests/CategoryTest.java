@@ -36,7 +36,7 @@ class CategoryTest {
 	@Test
 	@DisplayName("Test Category is correctly mapped")
 	void test_category_mappings() {
-		assertEquals("Cat Name", category.getName());
+		assertEquals("Test Category Name", category.getName());
 	}
 
 }

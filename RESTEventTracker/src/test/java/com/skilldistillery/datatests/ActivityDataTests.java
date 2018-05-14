@@ -27,19 +27,16 @@ public class ActivityDataTests {
 	@Test
 	public void test_show() {
 		assertEquals("Test Activity", as.show(1).getName());
-		assertEquals("This is filler just to pass tests.", as.show(1).getDescription());
+		assertEquals("This is filler to test against.", as.show(1).getDescription());
 		assertEquals("2018-05-11 12:05:07.0", as.show(1).getStartTime().toString());
 		assertEquals("2018-05-11 15:35:23.0", as.show(1).getEndTime().toString());
-		assertEquals("Cat Name", as.show(1).getCategory().getName());
+		assertEquals("Test Category Name", as.show(1).getCategory().getName());
 	}
 	
 	@Test
 	public void test_findByCategoryId() {
 		assertEquals("Test Activity", as.findByCategoryId(1).get(0).getName());
 	}
-	
-	
-
 	
 // A little experiment in times... planning on possibly revisiting when i actually figure out what i want this to do
 //	@Test

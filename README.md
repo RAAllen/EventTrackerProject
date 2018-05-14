@@ -6,36 +6,42 @@
 
 ## Live Web Interaction
 
-* If you want to interact with the finished program, please visit: INSERT_URL_HERE_WHEN_UPLOADED.
+* If you want to interact with the finished program, please visit: http://18.220.178.242:8080/EventTrackerProject.
 * See the program specifications below for routes to use.
 
 ## Program Specifications
 
+* Some of the following routes require [Postman](https://www.getpostman.com/apps) to test as there is no current front end of this project.
+
 ### Activity Routing
 
-* The user will be presented with full list of the database activities at: .
+* The user will be presented with full list of the database activities at: http://18.220.178.242:8080/EventTrackerProject/api/activites.
 
-* The user will be able to view an activity (accessed by the id of the activity) at: .
+* The user will be able to view an activity (accessed by the id of the activity) at: http://18.220.178.242:8080/EventTrackerProject/api/activites/{INSERT AN ID HERE}.
 
-* The user will be able to replace an activity (accessed by the id of the activity) at: .
+* The user will be able to create a new activity at the following Postman route: "localhost:8080/api/activities/" using the method "POST".
 
-* The user will be able to edit an activity (accessed by the id of the activity) at: .
+* The user will be able to replace an activity (accessed by the id of the activity) using Postman and the following route: "localhost:8080/api/activities/{INSERT AN ID HERE}" using method "PUT".
 
-* The user will be able to delete an activity (accessed by the id of the activity) at: .
+* The user will be able to edit an activity (accessed by the id of the activity) using Postman and the following route: "localhost:8080/api/activities/{INSERT AN ID HERE}" using method "PATCH".
+
+* The user will be able to delete an activity (accessed by the id of the activity) using Postman and the following route: "localhost:8080/api/activities/{INSERT AN ID HERE}" using method "DELETE".
 
 ### Category Routing
 
-* The user will be presented with full list of the database categories at: .
+* The user will be presented with full list of the database categories at: http://18.220.178.242:8080/EventTrackerProject/api/categories.
 
-* The user will be able to view an category by the id of the category at: .
+* The user will be able to view an category by the id of the category at: http://18.220.178.242:8080/EventTrackerProject/api/categories/{INSERT AN ID HERE}.
 
-* The user will be able to replace an category (accessed by the id of the category) at: .
+* The user will be able to create a new category at the following Postman route: "localhost:8080/api/categories/" using the method "POST".
 
-* The user will be able to edit an category (accessed by the id of the category) at: .
+* The user will be able to replace an category (accessed by the id of the category) using Postman and the following route: "localhost:8080/api/activities/{INSERT AN ID HERE}" using method "PUT".
 
-* The user will be able to delete an category (accessed by the id of the category) at: .
+* The user will be able to edit an category (accessed by the id of the category) using Postman and the following route: "localhost:8080/api/activities/{INSERT AN ID HERE}" using method "PATCH".
 
-* The user will be able to get all the categories corresponding to a category (accessed by the id of the category) at: .
+* The user will be able to delete an category (accessed by the id of the category) using Postman and the following route: "localhost:8080/api/categories/{INSERT AN ID HERE}" using method "DELETE".
+
+* The user will be able to get all the categories corresponding to a category (accessed by the id of the category) using Postman and the following route: "localhost:8080/api/categories/{INSERT AN ID HERE}/activities" using the method "GET".
 
 ## Setup/Installation requirements
 
