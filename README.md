@@ -6,7 +6,7 @@
 
 ## Live Web Interaction
 
-* If you want to interact with the finished program, please visit: http://18.220.178.242:8080/EventTrackerProject.
+* If you want to interact with the finished program, please visit: [Event Tracker](http://18.220.178.242:8080/RESTEventTracker/).
 * See the program specifications below for routes to use.
 
 ## Program Specifications
@@ -15,9 +15,9 @@
 
 ### Activity Routing
 
-* The user will be presented with full list of the database activities at: http://18.220.178.242:8080/EventTrackerProject/api/activites.
+* The user will be presented with full list of the database activities at: [http://18.220.178.242:8080/EventTrackerProject/api/activites](http://18.220.178.242:8080/EventTrackerProject/api/activites).
 
-* The user will be able to view an activity (accessed by the id of the activity) at: http://18.220.178.242:8080/EventTrackerProject/api/activites/{INSERT AN ID HERE}.
+* The user will be able to view an activity (accessed by the id of the activity) at: [http://18.220.178.242:8080/EventTrackerProject/api/activites/{](http://18.220.178.242:8080/EventTrackerProject/api/activites/{)INSERT AN ID HERE}.
 
 * The user will be able to create a new activity at the following Postman route: "localhost:8080/api/activities/" using the method "POST".
 
@@ -29,9 +29,9 @@
 
 ### Category Routing
 
-* The user will be presented with full list of the database categories at: http://18.220.178.242:8080/EventTrackerProject/api/categories.
+* The user will be presented with full list of the database categories at: [http://18.220.178.242:8080/EventTrackerProject/api/categories](http://18.220.178.242:8080/EventTrackerProject/api/categories).
 
-* The user will be able to view an category by the id of the category at: http://18.220.178.242:8080/EventTrackerProject/api/categories/{INSERT AN ID HERE}.
+* The user will be able to view an category by the id of the category at: [http://18.220.178.242:8080/EventTrackerProject/api/categories/](http://18.220.178.242:8080/EventTrackerProject/api/categories/){INSERT AN ID HERE}.
 
 * The user will be able to create a new category at the following Postman route: "localhost:8080/api/categories/" using the method "POST".
 
