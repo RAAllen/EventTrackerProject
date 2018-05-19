@@ -5,11 +5,23 @@
         <title>Productivity Tracker</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/activityScript.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         <div class="container">
-            <h1>Productivity Tracker</h1>
+            <div class="container-fluid" id="fakeNav">
+                <div class="row">
+                    <h1>Productivity Tracker</h1>
+                    <form name="getActivityForm">
+                        <button id="getCreateActivityForm">Create Activity</button>
+                    </form>
+                    <form name="getCategoryForm">
+                        <button id="getCreateCategoryForm">Create Category</button>
+                    </form>
+                </div>
+            </div>
+
+            <br><br>
 
             <form name="activityLookup">
                 <label name="activityId">Search for an activity by id: </label>
@@ -17,10 +29,39 @@
                 <button type="submit" name="lookUpActivityById">Search</button>
             </form>
 
+            <div id="createActivityForm">
+                <h2>Create a new Activity</h2>
+                <form name="newActivity">
+                    <label name="activityName">Enter an activity name:</label>
+                    <input name="activityName" type="text" placeholder="Fun Activity Name">
+                    <label name="categoryId">Enter a category:</label>
+                    <select name="categoryId">
+                        <!-- Dynamically Populate Category Options Here -->
+                    </select>
+                    <label name="activityDescription">Enter an activity description:</label>
+                    <input name="activityDescription" type="text" placeholder="Fun Activity Description">
+                    <label name="activityStartTime">Enter when the activity began:</label>
+                    <input name="activityStartTime" type="datetime-local" placeholder="In the year 2000...">
+                    <label name="activityEndTime">Enter when the activity ended:</label>
+                    <input name="activityEndTime" type="text" placeholder="In the year 2000...">
+                </form>
+            </div>
+
+            <br><br>
+
             <div id="displayActivity">
                 <!-- Activities Will Be Displayed Here -->
             </div>
 
+            <form name="categoryLookup">
+                <label name="categoryId">Search for an category by id: </label>
+                <input type="number" name="categoryId">
+                <button type="submit" name="lookUpCategoryById">Search</button>
+            </form>
+
+            <div id="displayCategory">
+                <!-- Categories Will Be Displayed Here -->
+            </div>
 
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
