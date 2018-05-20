@@ -32,10 +32,11 @@ public class ActivityServiceImpl implements ActivityService{
 	
 	@Override
 	public Activity create(Activity activity) {
-		Category category = new Category();
-		category.setId(activity.getCategory().getId());
-		activity.setCategory(category);
-		if(activity.getName() == null || activity.getDescription() == null || activity.getCategory() == null || activity.getStartTime() == null) {
+//		Category category = new Category();
+//		category.setId(activity.getCategory().getId());
+//		activity.setCategory(category);
+//		if(activity.getName() == null || activity.getDescription() == null || activity.getCategory() == null || activity.getStartTime() == null) {
+		if(activity.getName() == null || activity.getDescription() == null || activity.getStartTime() == null) {
 			activity = null;
 		}
 		ar.saveAndFlush(activity);
