@@ -24,13 +24,41 @@
             <br><br>
 
             <div class="container">
-                <form name="activityLookup">
-                    <label name="activityId">Search for an activity by id: </label>
-                    <input type="number" name="activityId">
-                    <button type="submit" name="lookUpActivityById">Search</button>
-                </form>
 
-                <br>
+                <div class="row">
+
+                    <div class="col">
+                        <form name="showAllActivities">
+                            <button type="submit" name="showAllActivities">Show All Activities</button>
+                        </form>
+                        <form name="activityLookup">
+                            <label name="activityId">Search for an activity by id: </label>
+                            <input type="number" name="activityId">
+                            <button type="submit" name="lookUpActivityById">Search</button>
+                        </form>
+                        <div id="displayActivity">
+                            <!-- Activities Will Be Displayed Here -->
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <form name="showAllCategories">
+                            <button type="submit" name="showAllCategories">Show All Categories</button>
+                        </form>
+                        <form name="categoryLookup">
+                            <label name="categoryId">Search for an category by id: </label>
+                            <input type="number" name="categoryId">
+                            <button type="submit" name="lookUpCategoryById">Search</button>
+                        </form>
+                        <div id="displayCategory">
+                            <!-- Categories Will Be Displayed Here -->
+                        </div>
+                    </div>
+                    
+                <!-- Row Ends Below This Line -->
+                </div>
+
+                <br><br>
 
                 <div id="createActivityForm">
                     <h2>Create a new Activity</h2>
@@ -56,19 +84,6 @@
 
                 <br><br>
 
-                <div id="displayActivity">
-                    <!-- Activities Will Be Displayed Here -->
-                </div>
-
-                <form name="categoryLookup">
-                    <label name="categoryId">Search for an category by id: </label>
-                    <input type="number" name="categoryId">
-                    <button type="submit" name="lookUpCategoryById">Search</button>
-                </form>
-
-                <div id="displayCategory">
-                    <!-- Categories Will Be Displayed Here -->
-                </div>
             </div>
 
         </div>
