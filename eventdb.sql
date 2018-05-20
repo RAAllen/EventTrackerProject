@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `end_time` DATETIME NULL,
   `activity_creation` DATETIME NOT NULL,
   `activity_update` DATETIME NULL,
-  `category_id` INT NOT NULL,
+  `category_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_activity_category_id_to_category_id_idx` (`category_id` ASC),

@@ -29,12 +29,18 @@ function init(){
         getAllCategories();
     })
 
-    // document.getActivityForm.getCreateActivityForm.addEventListener('click', function(event){
-    //     event.preventDefault();
-    //     getCategoryOptions(event);
-    // });
+    document.getActivityForm.getCreateActivityForm.addEventListener('click', function(event){
+        event.preventDefault();
+        if(createActivityForm.style.display === "none"){
+            // getCategoryOptions();
+            createActivityForm.style.display = "block";
+        }
+        else{
+            createActivityForm.style.display = "none";
+        }
+    });
 
-    // document.newActivity.save.addEventListener('click', sendNewActivity);
+    document.newActivity.sendNewActivity.addEventListener('click', sendNewActivity);
 }
 
 function getActivity(activityId){
@@ -75,20 +81,28 @@ function displayActivity(activityObject){
             list.appendChild(item);
         }
         // else if (property === "category") {
-            // need to make getcategoryforactivity method in order to implement this
-            // var subList = document.createElement('ul');
-            // for (var variable in object) {
-            //     if (object.hasOwnProperty(variable)) {
-            //         var subItem = document.createElement('li');
-            //         subItem.textContent = object[variable];
-            //         subList.appendChild(subItem);
-            //     }
-            // }
-            // list.appendChild(subList);
+        //     var categoryObject = activityObject[property];
+        //     var item = document.createElement('li');
+        //     item.textContent = property + ": " + categoryObject.name.value;
+        //     list.appendChild(item);
+        //     // var categoryObject = this.property.value;
+        //     // var subList = document.createElement('ul');
+        //     // for (property in categoryObject) {
+        //     //     if (categoryObject.hasOwnProperty(property)) {
+        //     //         var subItem = document.createElement('li');
+        //     //         subItem.textContent = categoryObject[property];
+        //     //         subList.appendChild(subItem);
+        //     //     }
+        //     // }
+        //     // list.appendChild(subList);
         // }
     }
     activityDiv.appendChild(list);
 }
+//
+// function getCategoryForActivity(activityId){
+//
+// }
 
 function displayActivityNotFound(activityId){
     var activityDiv = document.getElementById('displayActivity');
@@ -128,52 +142,92 @@ function displayAllActivities(location, object){
             list.appendChild(item);
         }
         // else if (property === "category") {
-            // need to make getcategoryforactivity method in order to implement this
-            // var subList = document.createElement('ul');
-            // for (var variable in object) {
-            //     if (object.hasOwnProperty(variable)) {
-            //         var subItem = document.createElement('li');
-            //         subItem.textContent = object[variable];
-            //         subList.appendChild(subItem);
-            //     }
-            // }
-            // list.appendChild(subList);
+        //     var subList = document.createElement('ul');
+        //     for (var variable in object) {
+        //         if (object.hasOwnProperty(variable)) {
+        //             var subItem = document.createElement('li');
+        //             subItem.textContent = object[variable];
+        //             subList.appendChild(subItem);
+        //         }
+        //     }
+        //     list.appendChild(subList);
         // }
     }
     location.appendChild(list);
 }
 
-function getCategoryOptions(event){
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'api/categories/', true);
-    xhr.onreadystatechange = function(){
-        if(this.readyState === 4){
-            if(this.status === 200){
-                var categoryJson = this.responseText;
-                var categoryList = JSON.parse(categoryJson);
-                createCategoryOptions(categoryList);
-                console.log(categoryList);
-            }
-        }
-        else{
-            console.log("categories not found");
-        }
-    }
-    xhr.send(null);
-}
+// function getCategoryOptions(event){
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'api/categories/', true);
+//     xhr.onreadystatechange = function(){
+//         if(this.readyState === 4){
+//             if(this.status === 200){
+//                 var categoryJson = this.responseText;
+//                 var categoryList = JSON.parse(categoryJson);
+//                 createCategoryOptions(categoryList);
+//                 console.log(categoryList);
+//             }
+//         }
+//         else{
+//             console.log("categories not found");
+//         }
+//     }
+//     xhr.send(null);
+// }
 
 // function createCategoryOptions(categoryList){
-//     var select = document.getElementById('categorySelectList');
+//     var selectCategories = document.getElementById('categorySelectList');
 //     for (var i = 0; i < categoryList.length; i++) {
 //         var option = document.createElement('option');
-//         option.textContent = "label=" + '"' + categoryList[i].name + '"' + "value=" + '"' + categoryList[i].id + '"';
-//         select.appendChild(option);
+//         option.value = categoryList[i].id;
+//         option.name = categoryList[i].name;
+//         option.textContent = categoryList[i].name;
+//         selectCategories.appendChild(option);
 //     }
 // }
 
-// function sendNewActivity(evt){
-//     evt.preventDefault();
-// }
+function sendNewActivity(evt){
+    evt.preventDefault();
+    var form = document.newActivity;
+    console.log(form.value);
+    // var categoryId = form.categorySelectList.value;
+    // var thisCategory = getCategory(categoryId);
+    // var categoryToSet = {
+    //     id: thisCategory.id.value,
+    //     name: thisCategory.name.value,
+    //     description: thisCategory.description.value
+    // }
+    var activity = {
+        name: form.activityName.value,
+        description: form.activityDescription.value,
+        startTime: form.activityStartTime.value,
+        endTime: form.activityEndTime.value,
+        // category: categoryToSet
+    };
+    var activityJSON = JSON.stringify(activity);
+    console.log(activity);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'api/activities/', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onreadystatechange = function(){
+        if(this.readyState === 4){
+            if(this.status === 200 || this.status === 201){
+                var newActitityJSON = this.responseText;
+                var newActivity = JSON.parse(newActitityJSON);
+                displayActivity(newActivity);
+            }
+            else{
+                displayError();
+            }
+        }
+    };
+    xhr.send(activityJSON);
+}
+
+function displayError(){
+    var errorDiv = document.getElementById('displayError');
+    errorDiv.textContent = "An Error Occurred.";
+}
 
 function getCategory(categoryId){
     var xhr = new XMLHttpRequest();
