@@ -33,8 +33,8 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(path="categories/{id}", method=RequestMethod.GET) 
-	public List<Category> show(@PathVariable Integer id) {
-		return cs.index();
+	public Category show(@PathVariable Integer id) {
+		return cs.show(id);
 	}
 	
 	@RequestMapping(path="categories", method=RequestMethod.POST) 
