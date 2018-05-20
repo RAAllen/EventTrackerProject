@@ -4,10 +4,6 @@ window.addEventListener('load', function(e){
 });
 
 function init(){
-    var activity = {
-
-    }
-
     document.activityLookup.lookUpActivityById.addEventListener('click', function(event){
         event.preventDefault();
         var activityId = document.activityLookup.activityId.value;
@@ -26,6 +22,11 @@ function init(){
         }
     });
 
+    // document.getActivityForm.getCreateActivityForm.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     getCategoryOptions(event);
+    // });
+
     // document.newActivity.save.addEventListener('click', sendNewActivity);
 }
 
@@ -35,15 +36,15 @@ function getActivity(activityId){
     xhr.onreadystatechange = function(){
         if(this.readyState === 4){
             if(this.status === 200){
-                var activityJson = this.responseText;
-                var activityObject = JSON.parse(activityJson);
-                displayActivity(activityObject);
+                var activityJSON = this.responseText;
+                if(activityJSON !== ""){
+                    var activityObject = JSON.parse(activityJSON);
+                    displayActivity(activityObject);
+                }
             }
-            else{
-                // this is not working for some reason...
-                console.log("activity was not found");
-                displayActivityNotFound(activityId);
-            }
+        }
+        else{
+            displayActivityNotFound(activityId);
         }
     }
     xhr.send(null);
@@ -60,12 +61,13 @@ function displayActivity(activityObject){
     var list = document.createElement('ul');
     // grab the object properties and dynamically create the rest of the content
     for(property in activityObject){
+
         if(property !== "name" && property !== "category"){
             var item = document.createElement('li');
             item.textContent = property + ": " + activityObject[property];
             list.appendChild(item);
         }
-        else if (property !== "category") {
+        // else if (property === "category") {
             // need to make getcategoryforactivity method in order to implement this
             // var subList = document.createElement('ul');
             // for (var variable in object) {
@@ -76,7 +78,7 @@ function displayActivity(activityObject){
             //     }
             // }
             // list.appendChild(subList);
-        }
+        // }
     }
     activityDiv.appendChild(list);
 }
@@ -86,7 +88,7 @@ function displayActivityNotFound(activityId){
     activityDiv.textContent = "Activity " + activityId + " Not Found!";
 }
 
-function getCategoryOptions(){
+function getCategoryOptions(event){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'api/categories/', true);
     xhr.onreadystatechange = function(){
@@ -97,43 +99,42 @@ function getCategoryOptions(){
                 createCategoryOptions(categoryList);
                 console.log(categoryList);
             }
-            else{
-                // this is not working for some reason...
-                console.log("categories not found");
-            }
+        }
+        else{
+            console.log("categories not found");
         }
     }
     xhr.send(null);
 }
 
-function createCategoryOptions(categoryList){
-    var select = document.getElementById('categoryId');
-    for (var i = 0; i < categoryList.length; i++) {
-        var option = document.createElement('option');
-        option.textContent = "label=" + '"' + categoryList[i].name + '"' + "value=" + '"' + categoryList[i].id + '"';
-        select.appendChild(option);
-    }
-}
+// function createCategoryOptions(categoryList){
+//     var select = document.getElementById('categorySelectList');
+//     for (var i = 0; i < categoryList.length; i++) {
+//         var option = document.createElement('option');
+//         option.textContent = "label=" + '"' + categoryList[i].name + '"' + "value=" + '"' + categoryList[i].id + '"';
+//         select.appendChild(option);
+//     }
+// }
 
-function sendNewActivity(evt){
-    evt.preventDefault();
-}
+// function sendNewActivity(evt){
+//     evt.preventDefault();
+// }
 
 function getCategory(categoryId){
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'api/categories/' + categoryId, true);
+    xhr.open('GET', 'api/categories/' + categoryId);
+    console.log(categoryId);
     xhr.onreadystatechange = function(){
         if(this.readyState === 4){
             if(this.status === 200){
-                var categoryJson = this.responseText;
-                var categoryObject = JSON.parse(categoryJson);
+                var categoryJSON = this.responseText;
+                var categoryObject = JSON.parse(categoryJSON);
                 displayCategory(categoryObject);
             }
-            else{
-                // this is not working for some reason...
-                console.log("activity was not found");
-                displayCategoryNotFound(categoryId);
-            }
+        }
+        else{
+            console.log("activity was not found");
+            displayCategoryNotFound(categoryId);
         }
     }
     xhr.send(null);
@@ -153,6 +154,7 @@ function displayCategory(categoryObject){
 }
 
 function displayCategoryNotFound(categoryId){
+    console.log(categoryId);
     var categoryDiv = document.getElementById('displayCategory');
     categoryDiv.textContent = "Category " + categoryId + " Not Found!";
 }
