@@ -71,6 +71,29 @@
                             </form>
                         </div>
 
+                        <div>
+                            <form id="formToReplaceActivity" name="formToReplaceActivity">
+                                <h2>Replace the Activity</h2>
+                                <label name="activityName">Enter an activity name:</label>
+                                <input name="activityName" type="text" placeholder="Fun Activity Name">
+                                <!-- <br> -->
+                                <!-- <label name="categorySelectList">Enter a category:</label> -->
+                                <!-- <select name="categorySelectList" id="categorySelectList"> -->
+                                    <!-- Dynamically Populate Category Options Here -->
+                                <!-- </select> -->
+                                <br>
+                                <label name="activityDescription">Enter an activity description:</label>
+                                <input name="activityDescription" type="text" placeholder="Fun Activity Description">
+                                <br>
+                                <label name="activityStartTime">Enter when the activity began:</label>
+                                <input name="activityStartTime" type="datetime-local" placeholder="In the year 2000...">
+                                <br>
+                                <label name="activityEndTime">Enter when the activity ended:</label>
+                                <input name="activityEndTime" type="datetime-local" placeholder="In the year 2000...">
+                                <button type="submit" id="sendReplaceActivity">Replace Activity</button>
+                            </form>
+                        </div>
+
                         <br>
 
                         <div id="displayActivity">

@@ -32,6 +32,7 @@ function init(){
     document.getActivityForm.getCreateActivityForm.addEventListener('click', function(event){
         event.preventDefault();
         if(createActivityForm.style.display === "none"){
+            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
             // getCategoryOptions();
             createActivityForm.style.display = "block";
         }
@@ -65,15 +66,12 @@ function getActivity(activityId){
 }
 
 function displayActivity(activityObject){
-    // target and clear out activity div
     var activityDiv = document.getElementById('displayActivity');
     activityDiv.textContent = "";
-    // dynamically create content to display the activity
     var nameH2 = document.createElement('h2');
     nameH2.textContent = activityObject.name;
     activityDiv.appendChild(nameH2);
     var list = document.createElement('ul');
-    // grab the object properties and dynamically create the rest of the content
     for(property in activityObject){
 
         if(property !== "name" && property !== "category"){
@@ -81,6 +79,7 @@ function displayActivity(activityObject){
             item.textContent = property + ": " + activityObject[property];
             list.appendChild(item);
         }
+        //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
         // else if (property === "category") {
         //     var categoryObject = activityObject[property];
         //     var item = document.createElement('li');
@@ -98,7 +97,6 @@ function displayActivity(activityObject){
         //     // list.appendChild(subList);
         // }
     }
-
     var replaceActivityForm = document.createElement('form');
     replaceActivityForm.name = "replaceActivityForm";
     var replaceActivityButton = document.createElement('button');
@@ -110,19 +108,36 @@ function displayActivity(activityObject){
     activityDiv.appendChild(replaceActivityForm);
     replaceActivityButton.addEventListener('click', function(event){
         event.preventDefault();
-        if(replaceActivityForm.style.display === "none"){
+        if(formToReplaceActivity.style.display === "none"){
+            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
             // getCategoryOptions();
-            replaceActivityForm.style.display = "block";
+            formToReplaceActivity.style.display = "block";
         }
         else{
-            replaceActivityForm.style.display = "none";
+            formToReplaceActivity.style.display = "none";
+        }
+    });
+
+    var editActivityForm = document.createElement('form');
+    editActivityForm.name = "editActivityForm";
+    var editActivityButton = document.createElement('button');
+    editActivityButton.id = "editActivityButton";
+    editActivityButton.type = "submit";
+    editActivityButton.innerHTML = "Edit Activity";
+    editActivityForm.appendChild(editActivityButton);
+    activityDiv.appendChild(editActivityForm);
+    editActivityButton.addEventListener('click', function(event){
+        event.preventDefault();
+        if(editActivityForm.style.display === "none"){
+            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+            // getCategoryOptions();
+            editActivityForm.style.display = "block";
+        }
+        else{
+            editActivityForm.style.display = "none";
         }
     });
 }
-//
-// function getCategoryForActivity(activityId){
-//
-// }
 
 function displayActivityNotFound(activityId){
     var activityDiv = document.getElementById('displayActivity');
@@ -149,18 +164,17 @@ function getAllActivities(){
 }
 
 function displayAllActivities(activityDiv, object){
-    // dynamically create content to display the activity
     var nameH2 = document.createElement('h2');
     nameH2.textContent = object.name;
     activityDiv.appendChild(nameH2);
     var list = document.createElement('ul');
-    // grab the object properties and dynamically create the rest of the content
     for(property in object){
         if(property !== "name" && property !== "category"){
             var item = document.createElement('li');
             item.textContent = property + ": " + object[property];
             list.appendChild(item);
         }
+        //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
         // else if (property === "category") {
         //     var subList = document.createElement('ul');
         //     for (var variable in object) {
@@ -181,19 +195,43 @@ function displayAllActivities(activityDiv, object){
     replaceActivityButton.type = "submit";
     replaceActivityButton.innerHTML = "Replace Activity";
     replaceActivityForm.appendChild(replaceActivityButton);
+    activityDiv.appendChild(list);
     activityDiv.appendChild(replaceActivityForm);
     replaceActivityButton.addEventListener('click', function(event){
         event.preventDefault();
-        if(replaceActivityForm.style.display === "none"){
+        if(formToReplaceActivity.style.display === "none"){
+            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
             // getCategoryOptions();
-            replaceActivityForm.style.display = "block";
+            formToReplaceActivity.style.display = "block";
         }
         else{
-            replaceActivityForm.style.display = "none";
+            formToReplaceActivity.style.display = "none";
         }
     });
+
+    var editActivityForm = document.createElement('form');
+    editActivityForm.name = "editActivityForm";
+    var editActivityButton = document.createElement('button');
+    editActivityButton.id = "editActivityButton";
+    editActivityButton.type = "submit";
+    editActivityButton.innerHTML = "Edit Activity";
+    editActivityForm.appendChild(editActivityButton);
+    activityDiv.appendChild(editActivityForm);
+    editActivityButton.addEventListener('click', function(event){
+        event.preventDefault();
+        if(editActivityForm.style.display === "none"){
+            // getCategoryOptions();
+            editActivityForm.style.display = "block";
+        }
+        else{
+            editActivityForm.style.display = "none";
+        }
+    });
+
 }
 
+
+//  had to comment these out because they were giving me 500 errrors when trying to save the new activity
 // function getCategoryOptions(event){
 //     var xhr = new XMLHttpRequest();
 //     xhr.open('GET', 'api/categories/', true);
@@ -213,6 +251,7 @@ function displayAllActivities(activityDiv, object){
 //     xhr.send(null);
 // }
 
+//  had to comment these out because they were giving me 500 errrors when trying to save the new activity
 // function createCategoryOptions(categoryList){
 //     var selectCategories = document.getElementById('categorySelectList');
 //     for (var i = 0; i < categoryList.length; i++) {
@@ -228,6 +267,7 @@ function sendNewActivity(evt){
     evt.preventDefault();
     var form = document.newActivity;
     console.log(form.value);
+    //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
     // var categoryId = form.categorySelectList.value;
     // var thisCategory = getCategory(categoryId);
     // var categoryToSet = {
@@ -240,6 +280,7 @@ function sendNewActivity(evt){
         description: form.activityDescription.value,
         startTime: form.activityStartTime.value,
         endTime: form.activityEndTime.value,
+        //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
         // category: categoryToSet
     };
     var activityJSON = JSON.stringify(activity);
@@ -292,7 +333,6 @@ function getCategory(categoryId){
 }
 
 function displayCategory(categoryObject){
-    // target and clear out category div, then dynamically create content
     var categoryDiv = document.getElementById('displayCategory');
     categoryDiv.textContent = "";
     var nameH2 = document.createElement('h2');
