@@ -43,6 +43,8 @@ function init(){
 
     document.newActivity.sendNewActivity.addEventListener('click', sendNewActivity);
 
+    document.formToReplaceActivity.sendReplaceActivity.addEventListener('click', sendReplaceActivity);
+
 }
 
 function getActivity(activityId){
@@ -60,6 +62,9 @@ function getActivity(activityId){
             else{
                 displayActivityNotFound(activityId);
             }
+        }
+        else{
+            displayActivityNotFound(activityId);
         }
     }
     xhr.send(null);
@@ -97,6 +102,16 @@ function displayActivity(activityObject){
         //     // list.appendChild(subList);
         // }
     }
+    activityDiv.appendChild(list);
+    var deleteActivityButton = document.createElement('button');
+    deleteActivityButton.innerHTML = "Delete Activity";
+    activityDiv.appendChild(deleteActivityButton);
+    deleteActivityButton.addEventListener('click', function(event){
+        if(confirm("Delete activity?")){
+            console.log(activityObject.id);
+            deleteActivity(activityObject.id);
+        }
+    });
     var replaceActivityForm = document.createElement('form');
     replaceActivityForm.name = "replaceActivityForm";
     var replaceActivityButton = document.createElement('button');
@@ -104,7 +119,6 @@ function displayActivity(activityObject){
     replaceActivityButton.type = "submit";
     replaceActivityButton.innerHTML = "Replace Activity";
     replaceActivityForm.appendChild(replaceActivityButton);
-    activityDiv.appendChild(list);
     activityDiv.appendChild(replaceActivityForm);
     replaceActivityButton.addEventListener('click', function(event){
         event.preventDefault();
@@ -141,6 +155,7 @@ function displayActivity(activityObject){
 
 function displayActivityNotFound(activityId){
     var activityDiv = document.getElementById('displayActivity');
+    activityDiv.textContent = "";
     activityDiv.textContent = "Activity " + activityId + " Not Found!";
 }
 
@@ -308,8 +323,59 @@ function displayError(){
     errorDiv.textContent = "An Error Occurred.";
 }
 
-function replaceActivity(activityObject){
+function replaceActivity(event){
+    evt.preventDefault();
+    console.log("hello");
+    var form = document.formToReplaceActivity;
+    //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    // var categoryId = form.categorySelectList.value;
+    // var thisCategory = getCategory(categoryId);
+    // var categoryToSet = {
+    //     id: thisCategory.id.value,
+    //     name: thisCategory.name.value,
+    //     description: thisCategory.description.value
+    // }
+    console.log(event.target.id);
+    var activity = {
+        id: event.target.id,
+        name: form.activityName.value,
+        description: form.activityDescription.value,
+        startTime: form.activityStartTime.value,
+        endTime: form.activityEndTime.value,
+        //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+        // category: categoryToSet
+    };
+    var activityJSON = JSON.stringify(activity);
+    console.log(activity);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'api/activities/', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onreadystatechange = function(){
+        if(this.readyState === 4){
+            if(this.status === 200 || this.status === 201){
+                var newActitityJSON = this.responseText;
+                var newActivity = JSON.parse(newActitityJSON);
+                displayActivity(newActivity);
+            }
+            else{
+                displayError();
+            }
+        }
+    };
+    xhr.send(activityJSON);
+}
 
+function deleteActivity(activityObjectId){
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', 'api/activities/' + activityObjectId, true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 202){
+                getAllActivities();
+            }
+        }
+    }
+    xhr.send(null);
 }
 
 function getCategory(categoryId){
