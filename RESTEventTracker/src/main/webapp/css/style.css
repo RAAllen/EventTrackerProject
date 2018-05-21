@@ -13,3 +13,7 @@
 #getCategoryForm {
     padding: 10px;
 }
+
+#replaceActivityForm {
+    display: none;
+}

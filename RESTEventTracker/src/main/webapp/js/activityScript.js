@@ -41,6 +41,7 @@ function init(){
     });
 
     document.newActivity.sendNewActivity.addEventListener('click', sendNewActivity);
+
 }
 
 function getActivity(activityId){
@@ -97,7 +98,26 @@ function displayActivity(activityObject){
         //     // list.appendChild(subList);
         // }
     }
+
+    var replaceActivityForm = document.createElement('form');
+    replaceActivityForm.name = "replaceActivityForm";
+    var replaceActivityButton = document.createElement('button');
+    replaceActivityButton.id = "replaceActivityButton";
+    replaceActivityButton.type = "submit";
+    replaceActivityButton.innerHTML = "Replace Activity";
+    replaceActivityForm.appendChild(replaceActivityButton);
     activityDiv.appendChild(list);
+    activityDiv.appendChild(replaceActivityForm);
+    replaceActivityButton.addEventListener('click', function(event){
+        event.preventDefault();
+        if(replaceActivityForm.style.display === "none"){
+            // getCategoryOptions();
+            replaceActivityForm.style.display = "block";
+        }
+        else{
+            replaceActivityForm.style.display = "none";
+        }
+    });
 }
 //
 // function getCategoryForActivity(activityId){
@@ -128,11 +148,11 @@ function getAllActivities(){
     xhr.send(null);
 }
 
-function displayAllActivities(location, object){
+function displayAllActivities(activityDiv, object){
     // dynamically create content to display the activity
     var nameH2 = document.createElement('h2');
     nameH2.textContent = object.name;
-    location.appendChild(nameH2);
+    activityDiv.appendChild(nameH2);
     var list = document.createElement('ul');
     // grab the object properties and dynamically create the rest of the content
     for(property in object){
@@ -153,7 +173,25 @@ function displayAllActivities(location, object){
         //     list.appendChild(subList);
         // }
     }
-    location.appendChild(list);
+    activityDiv.appendChild(list);
+    var replaceActivityForm = document.createElement('form');
+    replaceActivityForm.name = "replaceActivityForm";
+    var replaceActivityButton = document.createElement('button');
+    replaceActivityButton.id = "replaceActivityButton";
+    replaceActivityButton.type = "submit";
+    replaceActivityButton.innerHTML = "Replace Activity";
+    replaceActivityForm.appendChild(replaceActivityButton);
+    activityDiv.appendChild(replaceActivityForm);
+    replaceActivityButton.addEventListener('click', function(event){
+        event.preventDefault();
+        if(replaceActivityForm.style.display === "none"){
+            // getCategoryOptions();
+            replaceActivityForm.style.display = "block";
+        }
+        else{
+            replaceActivityForm.style.display = "none";
+        }
+    });
 }
 
 // function getCategoryOptions(event){
@@ -227,6 +265,10 @@ function sendNewActivity(evt){
 function displayError(){
     var errorDiv = document.getElementById('displayError');
     errorDiv.textContent = "An Error Occurred.";
+}
+
+function replaceActivity(activityObject){
+
 }
 
 function getCategory(categoryId){
