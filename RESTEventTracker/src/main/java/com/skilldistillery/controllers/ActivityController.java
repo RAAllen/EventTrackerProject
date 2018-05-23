@@ -48,8 +48,9 @@ public class ActivityController {
 	}
 	
 	@RequestMapping(path="activities/{id}", method=RequestMethod.DELETE)
-	public Boolean deleteCategory(@RequestBody Activity activity, @PathVariable Integer id) {
-		return as.delete(id);
+	public Boolean deleteCategory(@PathVariable Integer id) {		
+		boolean deleted = as.delete(id);
+		return deleted;
 	}
 	
 	

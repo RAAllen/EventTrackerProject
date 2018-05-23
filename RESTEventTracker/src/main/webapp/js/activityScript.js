@@ -70,8 +70,8 @@ function getActivity(activityId){
     xhr.send(null);
 }
 
-function displayActivity(activityObject){
-    var activityDiv = document.getElementById('displayActivity');
+function getActivituyHTML(activityObject){
+    var activityDiv = document.createElement('div');
     activityDiv.textContent = "";
     var nameH2 = document.createElement('h2');
     nameH2.textContent = activityObject.name;
@@ -112,26 +112,6 @@ function displayActivity(activityObject){
             deleteActivity(activityObject.id);
         }
     });
-    var replaceActivityForm = document.createElement('form');
-    replaceActivityForm.name = "replaceActivityForm";
-    var replaceActivityButton = document.createElement('button');
-    replaceActivityButton.id = "replaceActivityButton";
-    replaceActivityButton.type = "submit";
-    replaceActivityButton.innerHTML = "Replace Activity";
-    replaceActivityForm.appendChild(replaceActivityButton);
-    activityDiv.appendChild(replaceActivityForm);
-    replaceActivityButton.addEventListener('click', function(event){
-        event.preventDefault();
-        if(formToReplaceActivity.style.display === "none"){
-            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
-            // getCategoryOptions();
-            formToReplaceActivity.style.display = "block";
-        }
-        else{
-            formToReplaceActivity.style.display = "none";
-        }
-    });
-
     var editActivityForm = document.createElement('form');
     editActivityForm.name = "editActivityForm";
     var editActivityButton = document.createElement('button');
@@ -139,19 +119,112 @@ function displayActivity(activityObject){
     editActivityButton.type = "submit";
     editActivityButton.innerHTML = "Edit Activity";
     editActivityForm.appendChild(editActivityButton);
+    editActivityButton.activityObject = activityObject;
     activityDiv.appendChild(editActivityForm);
     editActivityButton.addEventListener('click', function(event){
         event.preventDefault();
-        if(editActivityForm.style.display === "none"){
-            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
-            // getCategoryOptions();
-            editActivityForm.style.display = "block";
-        }
-        else{
-            editActivityForm.style.display = "none";
-        }
+        initializeEditActivityForm(event.target.activityObject);
     });
+    return activityDiv;
 }
+
+function initializeEditActivityForm(activityObject) {
+    var editForm = document.formToReplaceActivity;
+    editForm.activityName.value = activityObject.name;
+    editForm.activityDescription.value = activityObject.description;
+    editForm.activityStartTime.value = activityObject.startTime;
+    editForm.activityEndTime.value = activityObject.endTime;
+    editForm.style.display = 'block';
+}
+
+function displayActivity(activityObject){
+    var activityDiv = document.getElementById('displayActivity');
+    activityDiv.textContent = "";
+    activityDiv.appendChild(getActivituyHTML(activityObject));
+    // var nameH2 = document.createElement('h2');
+    // nameH2.textContent = activityObject.name;
+    // activityDiv.appendChild(nameH2);
+    // var list = document.createElement('ul');
+    // for(property in activityObject){
+    //
+    //     if(property !== "name" && property !== "category"){
+    //         var item = document.createElement('li');
+    //         item.textContent = property + ": " + activityObject[property];
+    //         list.appendChild(item);
+    //     }
+    //     //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //     // else if (property === "category") {
+    //     //     var categoryObject = activityObject[property];
+    //     //     var item = document.createElement('li');
+    //     //     item.textContent = property + ": " + categoryObject.name.value;
+    //     //     list.appendChild(item);
+    //     //     // var categoryObject = this.property.value;
+    //     //     // var subList = document.createElement('ul');
+    //     //     // for (property in categoryObject) {
+    //     //     //     if (categoryObject.hasOwnProperty(property)) {
+    //     //     //         var subItem = document.createElement('li');
+    //     //     //         subItem.textContent = categoryObject[property];
+    //     //     //         subList.appendChild(subItem);
+    //     //     //     }
+    //     //     // }
+    //     //     // list.appendChild(subList);
+    //     // }
+    // }
+    // activityDiv.appendChild(list);
+    // var deleteActivityButton = document.createElement('button');
+    // deleteActivityButton.innerHTML = "Delete Activity";
+    // activityDiv.appendChild(deleteActivityButton);
+    // deleteActivityButton.addEventListener('click', function(event){
+    //     if(confirm("Delete activity?")){
+    //         console.log(activityObject.id);
+    //         deleteActivity(activityObject.id);
+    //     }
+    // });
+    // var replaceActivityForm = document.createElement('form');
+    // replaceActivityForm.name = "replaceActivityForm";
+    // var replaceActivityButton = document.createElement('button');
+    // replaceActivityButton.id = "replaceActivityButton";
+    // replaceActivityButton.type = "submit";
+    // replaceActivityButton.innerHTML = "Replace Activity";
+    // replaceActivityForm.appendChild(replaceActivityButton);
+    // activityDiv.appendChild(replaceActivityForm);
+    // replaceActivityButton.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     if(formToReplaceActivity.style.display === "none"){
+    //         //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //         // getCategoryOptions();
+    //         formToReplaceActivity.style.display = "block";
+    //     }
+    //     else{
+    //         formToReplaceActivity.style.display = "none";
+    //     }
+    // });
+    //
+    // var editActivityForm = document.createElement('form');
+    // editActivityForm.name = "editActivityForm";
+    // var editActivityButton = document.createElement('button');
+    // editActivityButton.id = "editActivityButton";
+    // editActivityButton.type = "submit";
+    // editActivityButton.innerHTML = "Edit Activity";
+    // editActivityForm.appendChild(editActivityButton);
+    // activityDiv.appendChild(editActivityForm);
+    // editActivityButton.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     if(editActivityForm.style.display === "none"){
+    //         //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //         // getCategoryOptions();
+    //         editActivityForm.style.display = "block";
+    //     }
+    //     else{
+    //         editActivityForm.style.display = "none";
+    //     }
+    // });
+}
+
+
+
+
+
 
 function displayActivityNotFound(activityId){
     var activityDiv = document.getElementById('displayActivity');
@@ -167,81 +240,160 @@ function getAllActivities(){
             if(this.status === 200){
                 var activitiesJSON = this.responseText;
                 var activitiesListObject = JSON.parse(activitiesJSON);
-                var activityDiv = document.getElementById('displayActivity');
-                activityDiv.textContent = "";
-                for (var i = 0; i < activitiesListObject.length; i++) {
-                    displayAllActivities(activityDiv, activitiesListObject[i]);
-                }
+                displayAllActivities(activitiesListObject);
             }
         }
     }
     xhr.send(null);
 }
 
-function displayAllActivities(activityDiv, object){
-    var nameH2 = document.createElement('h2');
-    nameH2.textContent = object.name;
-    activityDiv.appendChild(nameH2);
-    var list = document.createElement('ul');
-    for(property in object){
-        if(property !== "name" && property !== "category"){
-            var item = document.createElement('li');
-            item.textContent = property + ": " + object[property];
-            list.appendChild(item);
-        }
-        //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
-        // else if (property === "category") {
-        //     var subList = document.createElement('ul');
-        //     for (var variable in object) {
-        //         if (object.hasOwnProperty(variable)) {
-        //             var subItem = document.createElement('li');
-        //             subItem.textContent = object[variable];
-        //             subList.appendChild(subItem);
-        //         }
-        //     }
-        //     list.appendChild(subList);
-        // }
-    }
-    activityDiv.appendChild(list);
-    var replaceActivityForm = document.createElement('form');
-    replaceActivityForm.name = "replaceActivityForm";
-    var replaceActivityButton = document.createElement('button');
-    replaceActivityButton.id = "replaceActivityButton";
-    replaceActivityButton.type = "submit";
-    replaceActivityButton.innerHTML = "Replace Activity";
-    replaceActivityForm.appendChild(replaceActivityButton);
-    activityDiv.appendChild(list);
-    activityDiv.appendChild(replaceActivityForm);
-    replaceActivityButton.addEventListener('click', function(event){
-        event.preventDefault();
-        if(formToReplaceActivity.style.display === "none"){
-            //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
-            // getCategoryOptions();
-            formToReplaceActivity.style.display = "block";
-        }
-        else{
-            formToReplaceActivity.style.display = "none";
-        }
-    });
+function getAllActivitiesHTML(activitiesList){
+    var activitiesDiv = document.createElement('div');
+    console.log(activitiesList);
 
-    var editActivityForm = document.createElement('form');
-    editActivityForm.name = "editActivityForm";
-    var editActivityButton = document.createElement('button');
-    editActivityButton.id = "editActivityButton";
-    editActivityButton.type = "submit";
-    editActivityButton.innerHTML = "Edit Activity";
-    editActivityForm.appendChild(editActivityButton);
-    activityDiv.appendChild(editActivityForm);
-    editActivityButton.addEventListener('click', function(event){
-        event.preventDefault();
-        if(editActivityForm.style.display === "none"){
-            // getCategoryOptions();
-            editActivityForm.style.display = "block";
-        }
-        else{
-            editActivityForm.style.display = "none";
-        }
-    });
+    for (var i=0; i<activitiesList.length;i++) {
+        var aDiv = getActivituyHTML(activitiesList[i]);
+        console.log(aDiv);
+        activitiesDiv.appendChild(aDiv);
+    }
+    return activitiesDiv;
+
+
+    // var activitiesDiv = document.createElement('div');
+    // var nameH2 = document.createElement('h2');
+    // nameH2.textContent = object.name;
+    // activityDiv.appendChild(nameH2);
+    // var list = document.createElement('ul');
+    // for(property in object){
+    //     if(property !== "name" && property !== "category"){
+    //         var item = document.createElement('li');
+    //         item.textContent = property + ": " + object[property];
+    //         list.appendChild(item);
+    //     }
+    //     //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //     // else if (property === "category") {
+    //     //     var subList = document.createElement('ul');
+    //     //     for (var variable in object) {
+    //     //         if (object.hasOwnProperty(variable)) {
+    //     //             var subItem = document.createElement('li');
+    //     //             subItem.textContent = object[variable];
+    //     //             subList.appendChild(subItem);
+    //     //         }
+    //     //     }
+    //     //     list.appendChild(subList);
+    //     // }
+    // }
+    // activityDiv.appendChild(list);
+    // var replaceActivityForm = document.createElement('form');
+    // replaceActivityForm.name = "replaceActivityForm";
+    // var replaceActivityButton = document.createElement('button');
+    // replaceActivityButton.id = "replaceActivityButton";
+    // replaceActivityButton.type = "submit";
+    // replaceActivityButton.innerHTML = "Replace Activity";
+    // replaceActivityForm.appendChild(replaceActivityButton);
+    // activityDiv.appendChild(list);
+    // activityDiv.appendChild(replaceActivityForm);
+    // replaceActivityButton.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     if(formToReplaceActivity.style.display === "none"){
+    //         //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //         // getCategoryOptions();
+    //         formToReplaceActivity.style.display = "block";
+    //     }
+    //     else{
+    //         formToReplaceActivity.style.display = "none";
+    //     }
+    // });
+    //
+    // var editActivityForm = document.createElement('form');
+    // editActivityForm.name = "editActivityForm";
+    // var editActivityButton = document.createElement('button');
+    // editActivityButton.id = "editActivityButton";
+    // editActivityButton.type = "submit";
+    // editActivityButton.innerHTML = "Edit Activity";
+    // editActivityForm.appendChild(editActivityButton);
+    // activityDiv.appendChild(editActivityForm);
+    // editActivityButton.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     if(editActivityForm.style.display === "none"){
+    //         // getCategoryOptions();
+    //         editActivityForm.style.display = "block";
+    //     }
+    //     else{
+    //         editActivityForm.style.display = "none";
+    //     }
+    // });
+
+}
+
+function displayAllActivities(object){
+    var activitiesDiv = document.getElementById('displayActivities');
+    console.log(activitiesDiv);
+    activitiesDiv.textContent = '';
+    activitiesDiv.appendChild(getAllActivitiesHTML(object));
+    // var nameH2 = document.createElement('h2');
+    // nameH2.textContent = object.name;
+    // activityDiv.appendChild(nameH2);
+    // var list = document.createElement('ul');
+    // for(property in object){
+    //     if(property !== "name" && property !== "category"){
+    //         var item = document.createElement('li');
+    //         item.textContent = property + ": " + object[property];
+    //         list.appendChild(item);
+    //     }
+    //     //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //     // else if (property === "category") {
+    //     //     var subList = document.createElement('ul');
+    //     //     for (var variable in object) {
+    //     //         if (object.hasOwnProperty(variable)) {
+    //     //             var subItem = document.createElement('li');
+    //     //             subItem.textContent = object[variable];
+    //     //             subList.appendChild(subItem);
+    //     //         }
+    //     //     }
+    //     //     list.appendChild(subList);
+    //     // }
+    // }
+    // activityDiv.appendChild(list);
+    // var replaceActivityForm = document.createElement('form');
+    // replaceActivityForm.name = "replaceActivityForm";
+    // var replaceActivityButton = document.createElement('button');
+    // replaceActivityButton.id = "replaceActivityButton";
+    // replaceActivityButton.type = "submit";
+    // replaceActivityButton.innerHTML = "Replace Activity";
+    // replaceActivityForm.appendChild(replaceActivityButton);
+    // activityDiv.appendChild(list);
+    // activityDiv.appendChild(replaceActivityForm);
+    // replaceActivityButton.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     if(formToReplaceActivity.style.display === "none"){
+    //         //  had to comment these out because they were giving me 500 errrors when trying to save the new activity
+    //         // getCategoryOptions();
+    //         formToReplaceActivity.style.display = "block";
+    //     }
+    //     else{
+    //         formToReplaceActivity.style.display = "none";
+    //     }
+    // });
+
+    // var editActivityForm = document.createElement('form');
+    // editActivityForm.name = "editActivityForm";
+    // var editActivityButton = document.createElement('button');
+    // editActivityButton.id = "editActivityButton";
+    // editActivityButton.type = "submit";
+    // editActivityButton.innerHTML = "Edit Activity";
+    // editActivityForm.appendChild(editActivityButton);
+    // activityDiv.appendChild(editActivityForm);
+    // editActivityButton.addEventListener('click', function(event){
+    //     event.preventDefault();
+    //     if(editActivityForm.style.display === "none"){
+    //         // getCategoryOptions();
+    //         editActivityForm.style.display = "block";
+    //     }
+    //     else{
+    //         editActivityForm.style.display = "none";
+    //     }
+    // });
 
 }
 
@@ -370,7 +522,7 @@ function deleteActivity(activityObjectId){
     xhr.open('DELETE', 'api/activities/' + activityObjectId, true);
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
-            if(xhr.status === 202){
+            if(xhr.status === 200){
                 getAllActivities();
             }
         }
