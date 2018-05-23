@@ -2,6 +2,7 @@ window.addEventListener('load', function(e){
     init();
 });
 
+// Initialize
 function init(){
     document.activityLookup.lookUpActivityById.addEventListener('click', function(event){
         event.preventDefault();
@@ -32,6 +33,7 @@ function init(){
 
 }
 
+// Get One
 function getActivity(activityId){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'api/activities/' + activityId, true);
@@ -55,6 +57,7 @@ function getActivity(activityId){
     xhr.send(null);
 }
 
+// Print One
 function getActivityHTML(activityObject){
     var activityDiv = document.createElement('div');
     activityDiv.textContent = "";
@@ -63,7 +66,6 @@ function getActivityHTML(activityObject){
     activityDiv.appendChild(nameH2);
     var list = document.createElement('ul');
     for(property in activityObject){
-
         if(property !== "name" && property !== "category"){
             var item = document.createElement('li');
             item.textContent = property + ": " + activityObject[property];
@@ -73,10 +75,10 @@ function getActivityHTML(activityObject){
     activityDiv.appendChild(list);
     var deleteActivityButton = document.createElement('button');
     deleteActivityButton.innerHTML = "Delete Activity";
+    deleteActivityButton.class = "btn btn-info";
     activityDiv.appendChild(deleteActivityButton);
     deleteActivityButton.addEventListener('click', function(event){
         if(confirm("Delete activity?")){
-            console.log(activityObject.id);
             deleteActivity(activityObject.id);
         }
     });
@@ -86,6 +88,7 @@ function getActivityHTML(activityObject){
     editActivityButton.id = "editActivityButton";
     editActivityButton.type = "submit";
     editActivityButton.innerHTML = "Edit Activity";
+    editActivityButton.class = "btn btn-info";
     editActivityForm.appendChild(editActivityButton);
     editActivityButton.activityObject = activityObject;
     activityDiv.appendChild(editActivityForm);
@@ -96,6 +99,7 @@ function getActivityHTML(activityObject){
     return activityDiv;
 }
 
+// Pass in Values To Edit
 function initializeEditActivityForm(activityObject) {
     var editForm = document.formToReplaceActivity;
     editForm.activityName.value = activityObject.name;
@@ -105,18 +109,21 @@ function initializeEditActivityForm(activityObject) {
     editForm.style.display = 'block';
 }
 
+// Print One
 function displayActivity(activityObject){
     var activityDiv = document.getElementById('displayActivity');
     activityDiv.textContent = "";
     activityDiv.appendChild(getActivityHTML(activityObject));
 }
 
+// Not Found
 function displayActivityNotFound(activityId){
     var activityDiv = document.getElementById('displayActivity');
     activityDiv.textContent = "";
     activityDiv.textContent = "Activity " + activityId + " Not Found!";
 }
 
+// Get All
 function getAllActivities(){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'api/activities/', true);
@@ -132,6 +139,7 @@ function getAllActivities(){
     xhr.send(null);
 }
 
+// Print All
 function getAllActivitiesHTML(activitiesList){
     var activityDiv = document.getElementById('displayActivity');
     activityDiv.textContent = "";
@@ -143,10 +151,10 @@ function getAllActivitiesHTML(activitiesList){
     return activityDiv;
 }
 
+// Create
 function sendNewActivity(evt){
     evt.preventDefault();
     var form = document.newActivity;
-    console.log(form.value);
     var activity = {
         name: form.activityName.value,
         description: form.activityDescription.value,
@@ -154,7 +162,6 @@ function sendNewActivity(evt){
         endTime: form.activityEndTime.value
     };
     var activityJSON = JSON.stringify(activity);
-    console.log(activity);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'api/activities/', true);
     xhr.setRequestHeader('Content-type', 'application/json');
@@ -178,11 +185,10 @@ function displayError(){
     errorDiv.textContent = "An Error Occurred.";
 }
 
+// Update
 function replaceActivity(event){
     evt.preventDefault();
-    console.log("hello");
     var form = document.formToReplaceActivity;
-    console.log(event.target.id);
     var activity = {
         id: event.target.id,
         name: form.activityName.value,
@@ -191,7 +197,6 @@ function replaceActivity(event){
         endTime: form.activityEndTime.value
     };
     var activityJSON = JSON.stringify(activity);
-    console.log(activity);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'api/activities/', true);
     xhr.setRequestHeader('Content-type', 'application/json');
@@ -210,6 +215,7 @@ function replaceActivity(event){
     xhr.send(activityJSON);
 }
 
+// Delete
 function deleteActivity(activityObjectId){
     var xhr = new XMLHttpRequest();
     xhr.open('DELETE', 'api/activities/' + activityObjectId, true);
