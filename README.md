@@ -17,7 +17,7 @@
 
 * The user will be presented with full list of the database activities at: [http://18.220.178.242:8080/EventTrackerProject/api/activites](http://18.220.178.242:8080/EventTrackerProject/api/activites).
 
-* The user will be able to view an activity (accessed by the id of the activity) at: [http://18.220.178.242:8080/EventTrackerProject/api/activites/{](http://18.220.178.242:8080/EventTrackerProject/api/activites/{)INSERT AN ID HERE}.
+* The user will be able to view an activity (accessed by the id of the activity) at: [http://18.220.178.242:8080/EventTrackerProject/api/activites/](http://18.220.178.242:8080/EventTrackerProject/api/activites/){INSERT AN ID HERE}.
 
 * The user will be able to create a new activity at the following Postman route: "localhost:8080/api/activities/" using the method "POST".
 

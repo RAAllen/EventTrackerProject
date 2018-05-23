@@ -5,37 +5,98 @@
         <title>Productivity Tracker</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/eventScript.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <!-- START OF HTML BODY DIV -->
         <div class="container-fluid">
-
-            <!-- NAV -->
-            <div class="container row" id="nav">
-                <div class="col">
+            <div class="container-fluid" id="fakeNav">
+                <div class="row">
                     <h1>Productivity Tracker</h1>
                 </div>
-                <div class="col">
-                    <form name="getActivityForm">
-                        <button id="getCreateActivityForm">Create Activity</button>
-                    </form>
+            </div>
+
+            <br><br>
+
+            <div class="container">
+
+                <div id="displayError">
+                    <!-- Errors Will Display Here -->
                 </div>
+
+                <br>
+
+                <div class="row">
+
+                    <div class="col">
+                        <form name="showAllActivities">
+                            <button class="btn btn-info" type="submit" name="showAllActivities">Show All Activities</button>
+                        </form>
+
+                        <br>
+
+                        <form name="getActivityForm">
+                            <button class="btn btn-info" id="getCreateActivityForm">Create Activity</button>
+                        </form>
+
+                        <br>
+
+                        <form name="activityLookup">
+                            <label name="activityId">Search for an activity by id: </label>
+                            <input type="number" name="activityId">
+                            <button class="btn btn-info" type="submit" name="lookUpActivityById">Search</button>
+                        </form>
+
+                        <br>
+
+                        <div>
+                            <form id="createActivityForm" name="newActivity">
+                                <h2>Create a new Activity</h2>
+                                <label name="activityName">Enter an activity name:</label>
+                                <input name="activityName" type="text" placeholder="Fun Activity Name">
+                                <br>
+                                <label name="activityDescription">Enter an activity description:</label>
+                                <input name="activityDescription" type="text" placeholder="Fun Activity Description">
+                                <br>
+                                <label name="activityStartTime">Enter when the activity began:</label>
+                                <input name="activityStartTime" type="datetime-local" placeholder="In the year 2000...">
+                                <br>
+                                <label name="activityEndTime">Enter when the activity ended:</label>
+                                <input name="activityEndTime" type="datetime-local" placeholder="In the year 2000...">
+                                <button class="btn btn-info" type="submit" id="sendNewActivity">Create Activity</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <form id="formToReplaceActivity" name="formToReplaceActivity">
+                                <h2>Replace the Activity</h2>
+                                <label name="activityName">Enter an activity name:</label>
+                                <input name="activityName" type="text" placeholder="Fun Activity Name">
+                                <br>
+                                <label name="activityDescription">Enter an activity description:</label>
+                                <input name="activityDescription" type="text" placeholder="Fun Activity Description">
+                                <br>
+                                <label name="activityStartTime">Enter when the activity began:</label>
+                                <input name="activityStartTime" type="datetime-local" placeholder="In the year 2000...">
+                                <br>
+                                <label name="activityEndTime">Enter when the activity ended:</label>
+                                <input name="activityEndTime" type="datetime-local" placeholder="In the year 2000...">
+                                <button class="btn btn-info" type="submit" id="sendReplaceActivity">Replace Activity</button>
+                            </form>
+                        </div>
+
+                        <br>
+
+                        <div id="displayActivity">
+                            <!-- Activities Will Be Displayed Here -->
+                        </div>
+                    </div>
+
+                <!-- Row Ends Below This Line -->
+                </div>
+
+            <!-- Content Ends Below This Line -->
             </div>
 
-            <!-- ERRORS -->
-            <div id="displayError">
-            </div>
-
-            <!-- FORMS -->
-            <div id="displayForm">
-            </div>
-
-            <!-- DISPLAY ACTIVITIES DATA -->
-            <div id="displayActivites">
-            </div>
-
-        <!-- END OF HTML BODY DIV -->
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -17,3 +17,22 @@
 #formToReplaceActivity {
     display: none;
 }
+
+nav {
+    padding: 10px;
+    padding-top: 20px;
+    border: 10px;
+}
+
+button {
+    padding-top: 10px;
+    border: 10px;
+}
+
+body {
+    color: #663399 !important;
+}
+
+h1 {
+    color: #663399 !important;
+}
