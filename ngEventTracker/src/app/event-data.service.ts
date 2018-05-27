@@ -13,7 +13,7 @@ import { Activity } from './models/activity';
 })
 export class EventDataService {
 
-  private url = 'http://localhost:8080/EventTracker/activities';
+  private url = 'http://localhost:8080/api/activites/';
 
   // END OF FIELDS
 
@@ -35,12 +35,6 @@ export class EventDataService {
   }
 
   update(id: number, data: Activity) {
-    // if (data.completed === true) {
-    //   data.completeDate = this.datePipe.transform(Date.now(), 'shortDate');
-    // }
-    // if (data.completed === false) {
-    //   data.completeDate = '';
-    // }
     return this.http.put<Activity>(this.url + '/' + id, data)
     .pipe(
       catchError(this.handleError)

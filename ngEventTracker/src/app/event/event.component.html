@@ -1,1 +1,23 @@
 <h1>Event Tracker</h1>
+
+<!-- Task Table -->
+<table class="table table-hover" *ngIf="!selected">
+  <thead class="thead-dark">
+    <tr>
+      <th>Activity</th>
+      <th>Description</th>
+      <!-- <th>Completed</th>
+      <th>Delete</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let activity of activities">
+      <td>{{activity.name}}</td>
+      <td>{{activity.description}}</td>
+      <!-- <td (click)="displayToDo(todo)">{{todo.task}}</td> -->
+      <!-- <td><input type="checkbox" name="completed" (change)="updateCompleted(todo)" [(ngModel)]="todo.completed"></td> -->
+      <!-- <td>{{todo.completed}}</td> -->
+      <!-- <td><button (click)="deleteTodo(todo.id)">Delete</button></td> -->
+    </tr>
+  </tbody>
+</table>
