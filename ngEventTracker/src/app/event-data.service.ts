@@ -13,7 +13,7 @@ import { Activity } from './models/activity';
 })
 export class EventDataService {
 
-  private url = 'http://localhost:8080/api/activites/';
+  private url = 'http://localhost:8080/api/activities/';
 
   // END OF FIELDS
 
