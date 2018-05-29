@@ -15,6 +15,10 @@ export class EventComponent implements OnInit {
 
   activities: Activity[] = [];
 
+  activity = new Activity();
+
+  editActivity = null;
+
   selected = null;
 
   // END OF FIELDS
@@ -45,7 +49,7 @@ export class EventComponent implements OnInit {
   addActivity = function() {
     this.eventDataService.create(this.activity).subscribe(
       data => {
-        this.load();
+        this.reload();
         this.activity = new Activity();
       },
       err => console.log(err)

@@ -1,53 +1,70 @@
-<h1>Event Tracker</h1>
+<!-- BODY OPENING DIV -->
+<div class="container">
+  <h1>Event Tracker</h1>
 
-<!-- ACTIVITY TABLE -->
-<table class="table table-hover" *ngIf="!selected">
-  <thead class="thead thead-dark">
-    <tr>
-      <th>Activity</th>
-      <th>Description</th>
-      <!-- <th>Completed</th>
-      <th>Delete</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let activity of activities" (click)="displayActivity(activity)">
-      <td>{{activity.name}}</td>
-      <td>{{activity.description}}</td>
-      <!-- <td (click)="displayToDo(todo)">{{todo.task}}</td> -->
-      <!-- <td><input type="checkbox" name="completed" (change)="updateCompleted(todo)" [(ngModel)]="todo.completed"></td> -->
-      <!-- <td>{{todo.completed}}</td> -->
-      <!-- <td><button (click)="deleteTodo(todo.id)">Delete</button></td> -->
-    </tr>
-  </tbody>
-</table>
+  <!-- ACTIVITY TABLE -->
+  <table class="table table-hover" *ngIf="!selected">
+    <thead class="thead">
+      <tr>
+        <th>Activity</th>
+        <th>Description</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activity of activities" (click)="displayActivity(activity)">
+        <td>{{activity.name}}</td>
+        <td>{{activity.description}}</td>
+        <td><button class="btn btn-danger" (click)="deleteActivity(activity.id)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-<!-- DETAILED ACTIVITY VIEW -->
-<div *ngIf="selected && !editActivity">
-  <h3>{{selected.name}}</h3>
-  <ul class="list-group">
-    <li class="list-group-item">Activity Id: {{selected.id}}</li>
-    <li class="list-group-item">Description: {{selected.description}}</li>
-    <li class="list-group-item">Start Time: {{selected.startTime}}</li>
-    <li class="list-group-item">Start Time: {{selected.endTime}}</li>
-  </ul>
-  <button class="btn btn-info" (click)="displayActivityTable()">Table View</button>
-  <button class="btn btn-info" (click)="setEditActivity(selected)">Edit</button>
-</div>
+  <!-- DETAILED ACTIVITY VIEW -->
+  <div *ngIf="selected && !editActivity">
+    <h3>{{selected.name}}</h3>
+    <ul class="list-group">
+      <li class="list-group-item">Activity Id: {{selected.id}}</li>
+      <li class="list-group-item">Description: {{selected.description}}</li>
+      <li class="list-group-item">Start Time: {{selected.startTime}}</li>
+      <li class="list-group-item">Start Time: {{selected.endTime}}</li>
+    </ul>
+    <button class="btn btn-info" (click)="displayActivityTable()">Table View</button>
+    <button class="btn btn-info" (click)="setEditActivity(selected)">Edit</button>
+  </div>
 
-<!-- EDIT ACTIVITY FORM -->
-<div *ngIf="editActivity">
-  <form #editActivityForm = "ngForm">
-    <h3>Edit Activity</h3>
-    <div class="form-group">
-      <label for="name">Task</label>
-      <input class="form-control" type="text" name="name" placeholder="Activity Name" [ngModel]="editActivity.name">
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input class="form-control" type="text" name="description" placeholder="Description" [ngModel]="editActivity.description">
-    </div>
-    <input class="btn btn-info" type="submit" name="submit" value="Save" (click)="updateActivity(editActivityForm, editActivity.id)">
-    <input class="btn btn-info" type="submit" name="submit" value="Cancel" (click)="editActivity = null">
-  </form>
+  <!-- CREATE ACTIVITY FORM -->
+  <div *ngIf="!selected">
+    <form>
+      <h3>Create a new Activity</h3>
+      <div class="form-group">
+        <label for="name">Activity Name</label>
+        <input class="form-control" type="text" name="name" placeholder="Activity Name" [(ngModel)]="activity.name">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" type="text" name="description" placeholder="Description" [(ngModel)]="activity.description">
+      </div>
+      <button class="btn btn-success" type="submit" (click)="addActivity()">Add</button>
+    </form>
+  </div>
+
+  <!-- EDIT ACTIVITY FORM -->
+  <div *ngIf="editActivity">
+    <form>
+      <h3>Edit Activity</h3>
+      <div class="form-group">
+        <label for="name">Task</label>
+        <input class="form-control" type="text" name="name" placeholder="Activity Name" [(ngModel)]="editActivity.name">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" type="text" name="description" placeholder="Description" [(ngModel)]="editActivity.description">
+      </div>
+      <input class="btn btn-info" type="submit" name="submit" value="Save" (click)="updateActivity(editActivity)">
+      <input class="btn btn-info" type="submit" name="submit" value="Cancel" (click)="editActivity = null">
+    </form>
+  </div>
+
+<!-- BODY CLOSING DIV -->
 </div>

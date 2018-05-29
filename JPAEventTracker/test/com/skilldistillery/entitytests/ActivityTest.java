@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import com.skilldistillery.entities.Activity;
 
-
-
 class ActivityTest {
 
 	private EntityManagerFactory emf;

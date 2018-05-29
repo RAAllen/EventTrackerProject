@@ -27,27 +27,28 @@ export class EventDataService {
     );
   }
 
-  create(data) {
-    return this.http.post<Activity>(this.url, data)
+  create(activity: Activity) {
+    return this.http.post<Activity>(this.url, activity)
     .pipe(
-      catchError(this.handleError)
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('ERROR!!!');
+      })
     );
   }
 
-  update(id: number, data: Activity) {
-    return this.http.put<Activity>(this.url + '/' + id, data)
+  update(activity: Activity) {
+    return this.http.put<Activity>(this.url + '/' + activity.id, activity)
     .pipe(
-      catchError(this.handleError)
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('ERROR!!!');
+      })
     );
   }
 
   destroy(id: number) {
     return this.http.delete<Activity>(this.url + '/' + id);
-  }
-
-  handleError(error: any) {
-    console.error('KABLAM!!!');
-    return throwError(error.json().error || 'Server Error');
   }
 
   // END OF METHODS

@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(250) NOT NULL,
   `description` VARCHAR(1000) NOT NULL,
-  `start_time` DATETIME NOT NULL,
+  `start_time` DATETIME NULL,
   `end_time` DATETIME NULL,
   `activity_creation` DATETIME NOT NULL,
   `activity_update` DATETIME NULL,

@@ -10,6 +10,11 @@ buildscript {
 	}
 }
 
+plugins {
+  id 'org.hidetake.ssh' version '2.9.0'
+}
+
+apply plugin: 'org.hidetake.ssh'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -32,7 +37,6 @@ repositories {
 
 dependencies {
 	compile project(':JPAEventTracker')
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('mysql:mysql-connector-java')
@@ -43,4 +47,28 @@ dependencies {
         'org.junit.vintage:junit-vintage-engine:4.12.1',
         'org.junit.platform:junit-platform-launcher:1.0.1',
         'org.junit.platform:junit-platform-runner:1.0.1')
+}
+
+remotes {
+  ec2host {
+    host = '18.220.178.242' // Change this to you EC2 host's public IP
+    user = 'ec2-user'
+    identity = file("${System.properties['user.home']}/.ssh/aws2.pem")
+  }
+}
+
+task deploy(dependsOn: war, group: 'build') {
+  description = 'Deploy WAR file to remote server'
+  ssh.settings {
+    knownHosts = addHostKey(file("${System.properties['user.home']}/.ssh/known_hosts"))
+  }  
+  doLast {
+    logger.lifecycle("Deploying $war.archivePath to $remotes.ec2host.host")
+    ssh.run {
+      session(remotes.ec2host) {
+        put from: war.archivePath.absolutePath, into: '/var/lib/tomcat8/webapps'
+        logger.lifecycle("WAR file deployed to $remotes.ec2host.host")
+      }
+    }
+  }
 }
