@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Productivity Tracker</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="js/activityScript.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="container-fluid" id="fakeNav">
+                <div class="row">
+                    <h1>Productivity Tracker</h1>
+                    <!-- <form name="getCategoryForm">
+                        <button id="getCreateCategoryForm">Create Category</button> -->
+                    <!-- </form> -->
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="container">
+
+                <div id="displayError">
+                    <!-- Errors Will Display Here -->
+                </div>
+
+                <br>
+
+                <div class="row">
+
+                    <div class="col">
+                        <form name="showAllActivities">
+                            <button type="submit" name="showAllActivities">Show All Activities</button>
+                        </form>
+
+                        <br>
+
+                        <form name="getActivityForm">
+                            <button id="getCreateActivityForm">Create Activity</button>
+                        </form>
+
+                        <br>
+
+                        <form name="activityLookup">
+                            <label name="activityId">Search for an activity by id: </label>
+                            <input type="number" name="activityId">
+                            <button type="submit" name="lookUpActivityById">Search</button>
+                        </form>
+
+                        <br>
+
+                        <div>
+                            <form id="createActivityForm" name="newActivity">
+                                <h2>Create a new Activity</h2>
+                                <label name="activityName">Enter an activity name:</label>
+                                <input name="activityName" type="text" placeholder="Fun Activity Name">
+                                <br>
+                                <!-- <label name="categorySelectList">Enter a category:</label> -->
+                                <!-- <select name="categorySelectList" id="categorySelectList"> -->
+                                    <!-- Dynamically Populate Category Options Here -->
+                                <!-- </select> -->
+                                <br>
+                                <label name="activityDescription">Enter an activity description:</label>
+                                <input name="activityDescription" type="text" placeholder="Fun Activity Description">
+                                <br>
+                                <label name="activityStartTime">Enter when the activity began:</label>
+                                <input name="activityStartTime" type="datetime-local" placeholder="In the year 2000...">
+                                <br>
+                                <label name="activityEndTime">Enter when the activity ended:</label>
+                                <input name="activityEndTime" type="datetime-local" placeholder="In the year 2000...">
+                                <button type="submit" id="sendNewActivity">Create Activity</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <form id="formToReplaceActivity" name="formToReplaceActivity">
+                                <h2>Replace the Activity</h2>
+                                <label name="activityName">Enter an activity name:</label>
+                                <input name="activityName" type="text" placeholder="Fun Activity Name">
+                                <!-- <br> -->
+                                <!-- <label name="categorySelectList">Enter a category:</label> -->
+                                <!-- <select name="categorySelectList" id="categorySelectList"> -->
+                                    <!-- Dynamically Populate Category Options Here -->
+                                <!-- </select> -->
+                                <br>
+                                <label name="activityDescription">Enter an activity description:</label>
+                                <input name="activityDescription" type="text" placeholder="Fun Activity Description">
+                                <br>
+                                <label name="activityStartTime">Enter when the activity began:</label>
+                                <input name="activityStartTime" type="datetime-local" placeholder="In the year 2000...">
+                                <br>
+                                <label name="activityEndTime">Enter when the activity ended:</label>
+                                <input name="activityEndTime" type="datetime-local" placeholder="In the year 2000...">
+                                <button type="submit" id="sendReplaceActivity">Replace Activity</button>
+                            </form>
+                        </div>
+
+                        <br>
+
+                        <div id="displayActivity">
+                            <!-- Activities Will Be Displayed Here -->
+                        </div>
+                        <div id="displayActivities">
+                            <!-- Activities Will Be Displayed Here -->
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <form name="showAllCategories">
+                            <button type="submit" name="showAllCategories">Show All Categories</button>
+                        </form>
+
+                        <br>
+
+                        <form name="categoryLookup">
+                            <label name="categoryId">Search for an category by id: </label>
+                            <input type="number" name="categoryId">
+                            <button type="submit" name="lookUpCategoryById">Search</button>
+                        </form>
+                        <div id="displayCategory">
+                            <!-- Categories Will Be Displayed Here -->
+                        </div>
+                    </div>
+
+                <!-- Row Ends Below This Line -->
+                </div>
+
+            <!-- Content Ends Below This Line -->
+            </div>
+
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
